@@ -931,7 +931,7 @@ def create_model(
     __base__: Type['Model'] = None,
     __module__: str = __name__,
     __validators__: Dict[str, classmethod] = None,
-    __doc__: str = None,
+    __doc__: Optional[str] = None,
     **field_definitions: Any,
 ) -> Type['Model']:
     """

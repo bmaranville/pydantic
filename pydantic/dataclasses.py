@@ -186,8 +186,12 @@ def _process_class(
 
     validators = gather_all_validators(cls)
     cls.__pydantic_model__ = create_model(
-        cls.__name__, __config__=config, __module__=_cls.__module__, __validators__=validators,
-        __doc__ = docstring, **field_definitions
+        cls.__name__,
+        __config__=config,
+        __module__=_cls.__module__,
+        __validators__=validators,
+        __doc__=docstring,
+        **field_definitions,
     )
 
     cls.__initialised__ = False
