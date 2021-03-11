@@ -125,6 +125,8 @@ def _process_class(
 
     post_init_post_parse = getattr(_cls, '__post_init_post_parse__', None)
 
+    docstring = getattr(_cls, '__doc__', None)
+
     _pydantic_post_init = _generate_pydantic_post_init(post_init_original, post_init_post_parse)
 
     # If the class is already a dataclass, __post_init__ will not be called automatically
@@ -184,7 +186,8 @@ def _process_class(
 
     validators = gather_all_validators(cls)
     cls.__pydantic_model__ = create_model(
-        cls.__name__, __config__=config, __module__=_cls.__module__, __validators__=validators, **field_definitions
+        cls.__name__, __config__=config, __module__=_cls.__module__, __validators__=validators,
+        __doc__ = docstring, **field_definitions
     )
 
     cls.__initialised__ = False

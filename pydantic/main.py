@@ -931,6 +931,7 @@ def create_model(
     __base__: Type['Model'] = None,
     __module__: str = __name__,
     __validators__: Dict[str, classmethod] = None,
+    __doc__: str = None,
     **field_definitions: Any,
 ) -> Type['Model']:
     """
@@ -978,8 +979,11 @@ def create_model(
     if __validators__:
         namespace.update(__validators__)
     namespace.update(fields)
+
     if __config__:
         namespace['Config'] = inherit_config(__config__, BaseConfig)
+    if __doc__ is not None:
+        namespace['__doc__'] = __doc__
 
     return type(__model_name, (__base__,), namespace)
 
