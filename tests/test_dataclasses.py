@@ -727,11 +727,15 @@ def test_override_builtin_dataclass_nested():
 def test_override_builtin_dataclass_nested_schema():
     @dataclasses.dataclass
     class Meta:
+        """File Metadata"""
+
         modified_date: Optional[datetime]
         seen_count: int
 
     @dataclasses.dataclass
     class File:
+        """A File Class"""
+
         filename: str
         meta: Meta
 
@@ -745,6 +749,7 @@ def test_override_builtin_dataclass_nested_schema():
                 },
                 'required': ['modified_date', 'seen_count'],
                 'title': 'Meta',
+                'description': 'File Metadata',
                 'type': 'object',
             }
         },
@@ -754,6 +759,7 @@ def test_override_builtin_dataclass_nested_schema():
         },
         'required': ['filename', 'meta'],
         'title': 'File',
+        'description': 'A File Class',
         'type': 'object',
     }
 
